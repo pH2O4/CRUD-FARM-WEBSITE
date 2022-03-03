@@ -1,7 +1,8 @@
 import React,{useState} from "react";
-import './Header.css'
+import './Headerr.css'
 import {Form, Button} from "react-bootstrap"
 import "./Cadastro.css"
+import Axios from 'axios'
 
 import Header from "./Headerr"
 
@@ -15,7 +16,17 @@ setValues(prevValue=>({
 }
 
 const  clickButton = () => {
-  console.log(values);
+
+    Axios.post("http://localhost:8000/api/usuarios", {
+      Email: values.Email,
+      Senha: values.Senha,
+      SenhaV: values.SenhaV,
+      Nome: values.NomeC
+    }).then((response) => {
+      const resposta = response.data
+      window.alert(`${resposta}`)
+    })
+  
 };
 
     return(  <div>
@@ -25,6 +36,10 @@ const  clickButton = () => {
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label >Email address</Form.Label>
     <Form.Control onChange={changingvalue} name="Email" type="email" placeholder="Enter email" />
+    <Form.Label >Numero celular</Form.Label>
+    <Form.Control onChange={changingvalue} name="Numero" type="email" placeholder="Enter Number" />
+    <Form.Label >Nome Completo</Form.Label>
+    <Form.Control onChange={changingvalue} name="Nome" type="email" placeholder="Nome Completo" />
     <Form.Text className="text">
       Lembre-se de sua senha, não compartilhe seus dados!
     </Form.Text>

@@ -1,17 +1,14 @@
 import React from "react";
-import './Header.css'
-import { useState, useEffect } from "react";
+import './Headerr.css'
+import { useState} from "react";
 import { Form, Button } from "react-bootstrap"
 import "./login.css"
 import Axios from "axios"
-import Divreposta from '../componentes/Divrepostalogin'
 
 import Header from "./Headerr"
 
 function Login() {
   const [values, setValues] = useState()
-  const [respostas, setRespostas] = useState
-  console.log(respostas)
   const changingvalue = (value) => {
     setValues(prevValue => ({
       ...prevValue,
@@ -21,19 +18,14 @@ function Login() {
 
   const ClickButton = () => {
     Axios.get("http://localhost:8000/api/usuarios", {
-      email: values.Email,
-      senha: values.Senha,
-
+      Email: values.Email,
+      Senha: values.Senha,
     }).then((response) => {
-      console.log(response)
+      const resposta = response.data
+      window.alert(`${resposta}`)
     })
   }
 
-useEffect(() => {
-  Axios.get("http://localhost:8000/api/usuarios").then((response)=>{
-    setRespostas(response.data);
-  });
-}, []);
 
 
 return (<div className="login">
@@ -59,7 +51,7 @@ return (<div className="login">
         Submit
       </Button>
       <div>
-        <Divreposta></Divreposta>
+      
         </div>
     </Form>
 

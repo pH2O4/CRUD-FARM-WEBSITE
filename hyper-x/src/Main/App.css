@@ -1,0 +1,35 @@
+:root{
+    --Header-heigth: 80px;
+    --Footer-heigth: 100px;
+
+}
+
+.App{
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-rows:
+ var(--Header-heigth)
+ 1fr
+ var(--Footer-heigth);
+
+ grid-template-areas:
+ "Header"
+ "Contente"
+ "Footer";
+ 
+height: 100%;
+}
+
+.Header{
+    display: grid;
+    grid-area: Header;
+}
+
+.Content{
+    display: grid;
+    grid-area: Contente;
+}
+
+Footer.Footer{
+    display: gird;
+}

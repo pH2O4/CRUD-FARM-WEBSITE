@@ -27,19 +27,28 @@ router.get('/usuarios', async (req, res, next) => {
   }
 });
 
-router.post('/usuarios', async (req, res, next) => {
+router.post('/Cadastro', async (req, res, next) => {
 
   try {
     const { Email } = req.body
     const { Senha } = req.body
     const { Numero } = req.body
     const { SenhaV } = req.body
-    if(Senha != SenhaV){
+    const { Nome } = req.body
+    if (Senha != SenhaV) {
       res.send("Senhas não conferem")
+    } else {
+      await prisma.Usuarios.create({
+        data: {
+          Name: Nome,
+          Email: Email,
+          Numero: Numero,
+          Senha: Senha,
+        }
+      })
+      res.send("usuarios")
     }
-    const usuarios = await prisma.Usuarios.create({
-      data: 
-    })
+
 
 
   } catch (error) {

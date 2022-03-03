@@ -17,11 +17,11 @@ setValues(prevValue=>({
 
 const  clickButton = () => {
 
-    Axios.post("http://localhost:8000/api/usuarios", {
+    Axios.post("http://localhost:8000/api/Cadastro", {
       Email: values.Email,
       Senha: values.Senha,
       SenhaV: values.SenhaV,
-      Nome: values.NomeC
+      Nome: values.Nome
     }).then((response) => {
       const resposta = response.data
       window.alert(`${resposta}`)
@@ -37,9 +37,9 @@ const  clickButton = () => {
     <Form.Label >Email address</Form.Label>
     <Form.Control onChange={changingvalue} name="Email" type="email" placeholder="Enter email" />
     <Form.Label >Numero celular</Form.Label>
-    <Form.Control onChange={changingvalue} name="Numero" type="email" placeholder="Enter Number" />
+    <Form.Control onChange={changingvalue} name="Numero" type="text" placeholder="Enter Number" />
     <Form.Label >Nome Completo</Form.Label>
-    <Form.Control onChange={changingvalue} name="Nome" type="email" placeholder="Nome Completo" />
+    <Form.Control onChange={changingvalue} name="Nome" type="text" placeholder="Nome Completo" />
     <Form.Text className="text">
       Lembre-se de sua senha, não compartilhe seus dados!
     </Form.Text>

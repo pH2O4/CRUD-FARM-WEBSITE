@@ -1,26 +1,34 @@
 const router = require('express').Router();
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient} = require('@prisma/client')
 const cors = require('cors');
 const { response } = require('express');
 const express = require('express');
 
-const prisma = new PrismaClient
+const prisma = new PrismaClient();
 
 router.use(cors());
 router.use(express.json());
 
-router.get('/usuarios', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
 
   try {
-    const usuarios = await prisma.Usuarios.findMany({})
-    const { Email } = req.body
-    const { Senha } = req.body
-    if (usuarios == 0) {
-      res.send("usuário sem cadastro")
-    } else if (Email == true & Senha == false) {
-      res.send("Verifique sua senha")
-    } else {
-      console.log(usuarios)
+
+    const email = req.body.Email
+    const senha = req.body.Senha
+    const EMAILPRO = await prisma.usuarios.findMany({
+      where: {
+        Email: email,
+      },
+    })
+    const SENHAPRO = await prisma.usuarios.findMany({
+      where: {
+        Senha: senha,
+      },
+    })
+    if (EMAILPRO == 0) {
+      res.send("você ainda n tem cadastro")
+    } else if (SENHAPRO) {
+      res.send("senha errada")
     }
   } catch (error) {
     next(error)
@@ -30,23 +38,21 @@ router.get('/usuarios', async (req, res, next) => {
 router.post('/Cadastro', async (req, res, next) => {
 
   try {
-    const { Email } = req.body
-    const { Senha } = req.body
-    const { Numero } = req.body
-    const { SenhaV } = req.body
-    const { Nome } = req.body
-    if (Senha != SenhaV) {
+    const email = req.body.Email
+    const senha = req.body.Senha
+    const senhaV = req.body.SenhaV
+    const nome = req.body.Nome
+    if (senha != senhaV) {
       res.send("Senhas não conferem")
     } else {
-      await prisma.Usuarios.create({
+     const usuarios = await prisma.usuarios.create({
         data: {
-          Name: Nome,
-          Email: Email,
-          Numero: Numero,
-          Senha: Senha,
-        }
+          Nome: nome,
+          Email: email,
+          Senha: senha,
+        },
       })
-      res.send("usuarios")
+      res.send("criado")
     }
 
 

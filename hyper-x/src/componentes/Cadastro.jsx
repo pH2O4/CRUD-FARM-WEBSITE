@@ -21,7 +21,7 @@ const  clickButton = () => {
       Email: values.Email,
       Senha: values.Senha,
       SenhaV: values.SenhaV,
-      Nome: values.Nome
+      Nome: values.Nome,
     }).then((response) => {
       const resposta = response.data
       window.alert(`${resposta}`)
@@ -36,8 +36,6 @@ const  clickButton = () => {
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label >Email address</Form.Label>
     <Form.Control onChange={changingvalue} name="Email" type="email" placeholder="Enter email" />
-    <Form.Label >Numero celular</Form.Label>
-    <Form.Control onChange={changingvalue} name="Numero" type="text" placeholder="Enter Number" />
     <Form.Label >Nome Completo</Form.Label>
     <Form.Control onChange={changingvalue} name="Nome" type="text" placeholder="Nome Completo" />
     <Form.Text className="text">
@@ -51,7 +49,7 @@ const  clickButton = () => {
     <Form.Label >Repeat password </Form.Label>
     <Form.Control onChange={changingvalue} type="password"name="SenhaV"placeholder="Password" />
   </Form.Group>
-  <Button variant="primary" onClick={() => clickButton()} type="submit">
+  <Button variant="primary"  onClick={() => clickButton()}>
     Submit
   </Button>
 </Form>

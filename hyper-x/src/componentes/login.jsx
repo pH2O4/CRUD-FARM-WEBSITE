@@ -17,7 +17,7 @@ function Login() {
   }
 
   const ClickButton = () => {
-    Axios.get("http://localhost:8000/api/usuarios", {
+    Axios.post("http://localhost:8000/api/login", {
       Email: values.Email,
       Senha: values.Senha,
     }).then((response) => {
@@ -45,9 +45,9 @@ return (<div className="login">
         <Form.Control onChange={changingvalue} name="Senha" type="password" placeholder="Password" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Button type="button" href="/Cadastro" label="">Ainda não tem conta? Registre-se aqui! </Button>
+        <Button type="button" href="/Cadastro">Ainda não tem conta? Registre-se aqui! </Button>
       </Form.Group>
-      <Button variant="primary" onClick={() => ClickButton()} type="submit">
+      <Button variant="primary" onKeyPress={13} onClick={() => ClickButton()} >
         Submit
       </Button>
       <div>
